@@ -1,0 +1,36 @@
+{
+  "name": "lapi-http",
+  "version": "1.0.0",
+  "description": "HTTP classes for LAPI",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/gulp test",
+    "dev": "./node_modules/.bin/gulp watch:test",
+    "deploy": "./node_modules/.bin/gulp deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iobox/lapi-http.git"
+  },
+  "keywords": [
+    "lapi",
+    "http",
+    "request",
+    "response",
+    "controller",
+    "route",
+    "router"
+  ],
+  "author": "Long Do <me@dotronglong.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iobox/lapi-http/issues"
+  },
+  "homepage": "https://github.com/iobox/lapi-http#readme",
+  "devDependencies": {
+    "lapi-dev": "^1.0.x"
+  },
+  "dependencies": {
+    "lapi-common": "^1.0.x"
+  }
+}
