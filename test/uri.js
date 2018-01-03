@@ -12,6 +12,8 @@ describe('http/uri.js',() => {
     uri.set(Uri.PATH, '/dummy')
     uri.set(Uri.SEARCH, 'a=x&b=y')
     expect(uri.toString()).to.equal('https://abc.com/dummy?a=x&b=y')
+    uri.setQuery({a: 'y', b: 'x'})
+    expect(uri.toString()).to.equal('https://abc.com/dummy?a=y&b=x')
 
     expect(new Uri('https://abc.com/dummy?a=x&b=y').toString()).to.equal('https://abc.com/dummy?a=x&b=y')
   })

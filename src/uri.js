@@ -26,7 +26,9 @@ export default class Uri extends Bag {
       this.set(Uri.HASH, info.hash)
       this.set(Uri.HREF, info.href)
       this.set(Uri.SEARCH, info.search)
-      this.setQuery(info.query)
+      this.set(Uri.QUERY, new Bag(info.query))
+    } else {
+      this.set(Uri.QUERY, new Bag())
     }
   }
 
@@ -35,7 +37,7 @@ export default class Uri extends Bag {
    * @returns {Bag}
    */
   getQuery() {
-    return this._query
+    return this.get(Uri.QUERY)
   }
 
   /**
@@ -44,15 +46,16 @@ export default class Uri extends Bag {
    */
   setQuery(query) {
     if (query instanceof Bag) {
-      this._query = query
+      this.set(Uri.QUERY, query)
     } else if (typeof query === 'object') {
-      this._query = new Bag(query)
+      this.set(Uri.QUERY, new Bag(query))
     } else if (typeof query === 'string') {
       const url = new Url()
-      this._query = new Bag(url.parse(query, true).query)
+      this.set(Uri.QUERY, new Bag(url.parse(query, true).query))
     } else {
       throw new Error('The query of request must be either a string, an instance of Bag or an object.')
     }
+    this.set(Uri.SEARCH, this.getQuery().toString())
   }
 
   /**
@@ -78,3 +81,4 @@ Uri.PATH = 'path'
 Uri.HASH = 'hash'
 Uri.HREF = 'href'
 Uri.SEARCH = 'search'
+Uri.QUERY = 'query'

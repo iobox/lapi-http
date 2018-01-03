@@ -48,7 +48,9 @@ var Uri = function (_Bag) {
       _this.set(Uri.HASH, info.hash);
       _this.set(Uri.HREF, info.href);
       _this.set(Uri.SEARCH, info.search);
-      _this.setQuery(info.query);
+      _this.set(Uri.QUERY, new _lapiCommon.Bag(info.query));
+    } else {
+      _this.set(Uri.QUERY, new _lapiCommon.Bag());
     }
     return _this;
   }
@@ -62,7 +64,7 @@ var Uri = function (_Bag) {
   _createClass(Uri, [{
     key: 'getQuery',
     value: function getQuery() {
-      return this._query;
+      return this.get(Uri.QUERY);
     }
 
     /**
@@ -74,15 +76,16 @@ var Uri = function (_Bag) {
     key: 'setQuery',
     value: function setQuery(query) {
       if (query instanceof _lapiCommon.Bag) {
-        this._query = query;
+        this.set(Uri.QUERY, query);
       } else if ((typeof query === 'undefined' ? 'undefined' : _typeof(query)) === 'object') {
-        this._query = new _lapiCommon.Bag(query);
+        this.set(Uri.QUERY, new _lapiCommon.Bag(query));
       } else if (typeof query === 'string') {
         var url = new _url.Url();
-        this._query = new _lapiCommon.Bag(url.parse(query, true).query);
+        this.set(Uri.QUERY, new _lapiCommon.Bag(url.parse(query, true).query));
       } else {
         throw new Error('The query of request must be either a string, an instance of Bag or an object.');
       }
+      this.set(Uri.SEARCH, this.getQuery().toString());
     }
 
     /**
@@ -117,3 +120,4 @@ Uri.PATH = 'path';
 Uri.HASH = 'hash';
 Uri.HREF = 'href';
 Uri.SEARCH = 'search';
+Uri.QUERY = 'query';
