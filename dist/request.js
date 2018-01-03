@@ -8,6 +8,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _lapiCommon = require('lapi-common');
+
 var _message = require('./message');
 
 var _message2 = _interopRequireDefault(_message);
@@ -20,6 +22,10 @@ var _body = require('./body');
 
 var _body2 = _interopRequireDefault(_body);
 
+var _uri = require('./uri');
+
+var _uri2 = _interopRequireDefault(_uri);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29,7 +35,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var url = require('url');
-var Bag = require('lapi-common').Bag;
 
 /**
  * Http Request
@@ -48,11 +53,11 @@ var Request = function (_Message) {
     var _this = _possibleConstructorReturn(this, (Request.__proto__ || Object.getPrototypeOf(Request)).call(this));
 
     _this.setMethod(Request.DEFAULT_METHOD);
-    _this.setUri(new Bag());
-    _this.setQuery(new Bag());
-    _this.setServer(new Bag());
-    _this.setClient(new Bag());
-    _this.setAttributes(new Bag());
+    _this.setUri(new _lapiCommon.Bag());
+    _this.setQuery(new _lapiCommon.Bag());
+    _this.setServer(new _lapiCommon.Bag());
+    _this.setClient(new _lapiCommon.Bag());
+    _this.setAttributes(new _lapiCommon.Bag());
     return _this;
   }
 
@@ -81,7 +86,7 @@ var Request = function (_Message) {
 
     /**
      * Get URI
-     * @returns {Bag}
+     * @returns {Uri}
      */
 
   }, {
@@ -98,23 +103,7 @@ var Request = function (_Message) {
   }, {
     key: 'setUri',
     value: function setUri(uri) {
-      if (uri instanceof Bag) {
-        this._uri = uri;
-      } else if ((typeof uri === 'undefined' ? 'undefined' : _typeof(uri)) === 'object') {
-        this._uri = new Bag(uri);
-      } else if (typeof uri === 'string') {
-        var info = url.parse(uri, true);
-        this._uri.set(Request.URI_PROTOCOL, info.protocol);
-        this._uri.set(Request.URI_HOST, info.hostname);
-        this._uri.set(Request.URI_PORT, parseInt(info.port));
-        this._uri.set(Request.URI_PATH, info.pathname);
-        this._uri.set(Request.URI_HASH, info.hash);
-        this._uri.set(Request.URI_HREF, info.href);
-        this._uri.set(Request.URI_SEARCH, info.search);
-        this.setQuery(info.query);
-      } else {
-        throw new Error('The request\'s URI must be an instance of Bag, an object or a string.');
-      }
+      this._uri = new _uri2.default(uri);
     }
 
     /**
@@ -136,10 +125,10 @@ var Request = function (_Message) {
   }, {
     key: 'setAttributes',
     value: function setAttributes(attributes) {
-      if (attributes instanceof Bag) {
+      if (attributes instanceof _lapiCommon.Bag) {
         this._attributes = attributes;
       } else if ((typeof attributes === 'undefined' ? 'undefined' : _typeof(attributes)) === 'object') {
-        this._attributes = new Bag(attributes);
+        this._attributes = new _lapiCommon.Bag(attributes);
       } else {
         throw new Error('Attributes of request must be either an instance of Bag or an object');
       }
@@ -186,7 +175,7 @@ var Request = function (_Message) {
   }, {
     key: 'getQuery',
     value: function getQuery() {
-      return this._query;
+      return this.getUri().getQuery();
     }
 
     /**
@@ -197,15 +186,7 @@ var Request = function (_Message) {
   }, {
     key: 'setQuery',
     value: function setQuery(query) {
-      if (query instanceof Bag) {
-        this._query = query;
-      } else if ((typeof query === 'undefined' ? 'undefined' : _typeof(query)) === 'object') {
-        this._query = new Bag(query);
-      } else if (typeof query === 'string') {
-        this._query = new Bag(url.parse(query, true).query);
-      } else {
-        throw new Error('The query of request must be either a string, an instance of Bag or an object.');
-      }
+      this.getUri().setQuery(query);
     }
 
     /**
@@ -276,10 +257,10 @@ var Request = function (_Message) {
     value: function setServer() {
       var server = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      if (server instanceof Bag) {
+      if (server instanceof _lapiCommon.Bag) {
         this._server = server;
       } else if ((typeof server === 'undefined' ? 'undefined' : _typeof(server)) === 'object') {
-        this._server = new Bag(server);
+        this._server = new _lapiCommon.Bag(server);
       } else {
         throw new Error('The request\'s server information must be either an instance of Bag or an object.');
       }
@@ -306,10 +287,10 @@ var Request = function (_Message) {
     value: function setClient() {
       var client = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      if (client instanceof Bag) {
+      if (client instanceof _lapiCommon.Bag) {
         this._client = client;
       } else if ((typeof client === 'undefined' ? 'undefined' : _typeof(client)) === 'object') {
-        this._client = new Bag(client);
+        this._client = new _lapiCommon.Bag(client);
       } else {
         throw new Error('The request\'s client information must be either an instance of Bag or an object.');
       }

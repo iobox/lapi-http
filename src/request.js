@@ -1,8 +1,9 @@
 const url = require('url')
-const Bag = require('lapi-common').Bag
+import {Bag} from 'lapi-common'
 import Message from './message'
 import Header from './header'
 import Body from './body'
+import Uri from "./uri"
 
 /**
  * Http Request
@@ -41,7 +42,7 @@ export default class Request extends Message {
 
   /**
    * Get URI
-   * @returns {Bag}
+   * @returns {Uri}
    */
   getUri() {
     return this._uri
@@ -52,23 +53,7 @@ export default class Request extends Message {
    * @param {!string|Bag|Object} uri
    */
   setUri(uri) {
-    if (uri instanceof Bag) {
-      this._uri = uri
-    } else if (typeof uri === 'object') {
-      this._uri = new Bag(uri)
-    } else if (typeof uri === 'string') {
-      const info = url.parse(uri, true)
-      this._uri.set(Request.URI_PROTOCOL, info.protocol)
-      this._uri.set(Request.URI_HOST, info.hostname)
-      this._uri.set(Request.URI_PORT, parseInt(info.port))
-      this._uri.set(Request.URI_PATH, info.pathname)
-      this._uri.set(Request.URI_HASH, info.hash)
-      this._uri.set(Request.URI_HREF, info.href)
-      this._uri.set(Request.URI_SEARCH, info.search)
-      this.setQuery(info.query)
-    } else {
-      throw new Error('The request\'s URI must be an instance of Bag, an object or a string.')
-    }
+    this._uri = new Uri(uri)
   }
 
   /**
@@ -122,7 +107,7 @@ export default class Request extends Message {
    * @returns {Bag}
    */
   getQuery() {
-    return this._query
+    return this.getUri().getQuery()
   }
 
   /**
@@ -130,15 +115,7 @@ export default class Request extends Message {
    * @param {Bag|Object|string} query
    */
   setQuery(query) {
-    if (query instanceof Bag) {
-      this._query = query
-    } else if (typeof query === 'object') {
-      this._query = new Bag(query)
-    } else if (typeof query === 'string') {
-      this._query = new Bag(url.parse(query, true).query)
-    } else {
-      throw new Error('The query of request must be either a string, an instance of Bag or an object.')
-    }
+    this.getUri().setQuery(query)
   }
 
   /**

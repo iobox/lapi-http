@@ -24,7 +24,8 @@ var $exports = {
   "MiddleWare": "routing/middleware.js",
   "Route": "routing/route.js",
   "Router": "routing/router.js"
- }
+ },
+ "Uri": "uri.js"
 };
 const distDir = 'dist';
 function include(file, name) {
