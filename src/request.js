@@ -17,8 +17,7 @@ export default class Request extends Message {
   constructor() {
     super()
     this.setMethod(Request.DEFAULT_METHOD)
-    this.setUri(new Bag())
-    this.setQuery(new Bag())
+    this.setUri(new Uri())
     this.setServer(new Bag())
     this.setClient(new Bag())
     this.setAttributes(new Bag())

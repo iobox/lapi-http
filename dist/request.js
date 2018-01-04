@@ -53,8 +53,7 @@ var Request = function (_Message) {
     var _this = _possibleConstructorReturn(this, (Request.__proto__ || Object.getPrototypeOf(Request)).call(this));
 
     _this.setMethod(Request.DEFAULT_METHOD);
-    _this.setUri(new _lapiCommon.Bag());
-    _this.setQuery(new _lapiCommon.Bag());
+    _this.setUri(new _uri2.default());
     _this.setServer(new _lapiCommon.Bag());
     _this.setClient(new _lapiCommon.Bag());
     _this.setAttributes(new _lapiCommon.Bag());
