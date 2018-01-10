@@ -1,4 +1,4 @@
-let plXTXMHgcxQjWNVP = {
+var NkibNRAPOtewEgwl = {
  "Body": "body.js",
  "Controller": "controller.js",
  "exception": {
@@ -27,10 +27,10 @@ let plXTXMHgcxQjWNVP = {
  },
  "Uri": "uri.js"
 };
-const publish = function ($object) {
+var publish = function ($object) {
   Object.keys($object).forEach(function($key) {
     if (typeof $object[$key] === 'string') {
-      let pkg = require('./dist/' + $object[$key]);
+      var pkg = require('./dist/' + $object[$key]);
       $object[$key] = typeof pkg.default !== 'undefined' ? pkg.default : pkg;
     } else if (typeof $object[$key] === 'object') {
       $object[$key] = publish($object[$key])
@@ -39,4 +39,4 @@ const publish = function ($object) {
   
   return $object;
 };
-module.exports = publish(plXTXMHgcxQjWNVP);
+module.exports = publish(NkibNRAPOtewEgwl);
