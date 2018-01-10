@@ -1,4 +1,4 @@
-let $module = {
+let plXTXMHgcxQjWNVP = {
  "Body": "body.js",
  "Controller": "controller.js",
  "exception": {
@@ -39,4 +39,4 @@ const publish = function ($object) {
   
   return $object;
 };
-module.exports = publish($module);
+module.exports = publish(plXTXMHgcxQjWNVP);
