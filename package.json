@@ -1,6 +1,6 @@
 {
   "name": "lapi-http",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "HTTP classes for LAPI",
   "main": "index.js",
   "scripts": {

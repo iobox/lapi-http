@@ -66,6 +66,7 @@ export default class Request extends Message {
   /**
    * Set attributes
    * @param {Object|Bag} attributes
+   * @returns {Request}
    */
   setAttributes(attributes) {
     if (attributes instanceof Bag) {
@@ -75,6 +76,7 @@ export default class Request extends Message {
     } else {
       throw new Error('Attributes of request must be either an instance of Bag or an object')
     }
+    return this
   }
 
   /**
@@ -146,9 +148,10 @@ export default class Request extends Message {
    * Set an attribute by key
    * @param {!string} key
    * @param {*} [value=null]
+   * @returns {Request}
    */
   set(key, value = null) {
-    this.getAttributes().set(key, value)
+    return this.getAttributes().set(key, value)
   }
 
   /**
