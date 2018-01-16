@@ -119,6 +119,7 @@ var Request = function (_Message) {
     /**
      * Set attributes
      * @param {Object|Bag} attributes
+     * @returns {Request}
      */
 
   }, {
@@ -131,6 +132,7 @@ var Request = function (_Message) {
       } else {
         throw new Error('Attributes of request must be either an instance of Bag or an object');
       }
+      return this;
     }
 
     /**
@@ -225,6 +227,7 @@ var Request = function (_Message) {
      * Set an attribute by key
      * @param {!string} key
      * @param {*} [value=null]
+     * @returns {Request}
      */
 
   }, {
@@ -232,7 +235,7 @@ var Request = function (_Message) {
     value: function set(key) {
       var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-      this.getAttributes().set(key, value);
+      return this.getAttributes().set(key, value);
     }
 
     /**

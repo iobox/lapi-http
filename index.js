@@ -1,4 +1,4 @@
-var NkibNRAPOtewEgwl = {
+var AmXuTaQqiaFagweR = {
  "Body": "body.js",
  "Controller": "controller.js",
  "exception": {
@@ -39,4 +39,4 @@ var publish = function ($object) {
   
   return $object;
 };
-module.exports = publish(NkibNRAPOtewEgwl);
+module.exports = publish(AmXuTaQqiaFagweR);
