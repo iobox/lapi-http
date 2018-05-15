@@ -1,6 +1,6 @@
 {
   "name": "lapi-http",
-  "version": "1.0.9",
+  "version": "1.0.12",
   "description": "HTTP classes for LAPI",
   "main": "index.js",
   "scripts": {
@@ -27,10 +27,7 @@
     "url": "https://github.com/iobox/lapi-http/issues"
   },
   "homepage": "https://github.com/iobox/lapi-http#readme",
-  "devDependencies": {
-    "lapi-dev": "^1.0.x"
-  },
   "dependencies": {
-    "lapi-common": "^1.0.x"
+    "lapi-common": "~1.0.12"
   }
 }
